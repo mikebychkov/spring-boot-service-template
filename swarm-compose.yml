@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  app:
+    image: openjdk:17-jdk
+    volumes:
+      - ./target/report-1.jar:/app/service.jar
+    environment:
+      - TZ=UTC
+      - SPRING_PROFILES_ACTIVE=local
+    working_dir: /app
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    command: java -jar /app/service.jar
+    deploy:
+      replicas: 1
+      update_config:
+        order: start-first
+      resources:
+        limits:
+          memory: 4G

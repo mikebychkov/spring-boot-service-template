@@ -1,0 +1,28 @@
+version: "2.1"
+services:
+  db:
+    image: postgres:12.5
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pg_data/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_PASSWORD=dbpass
+      - POSTGRES_DB=dbapp
+      - POSTGRES_USER=dbuser
+  app:
+    image: openjdk:17-jdk
+    depends_on:
+      - db
+    mem_limit: 4G
+    volumes:
+      - ./target/report-1.jar:/app/service.jar
+    environment:
+      - TZ=UTC
+      - SPRING_PROFILES_ACTIVE=local
+    working_dir: /app
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    command: java -jar /app/service.jar
