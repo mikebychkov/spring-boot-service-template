@@ -3,7 +3,7 @@ services:
   app:
     image: openjdk:17-jdk
     volumes:
-      - ./target/report-1.jar:/app/service.jar
+      - ./target/service-1.jar:/app/service.jar
     environment:
       - TZ=UTC
       - SPRING_PROFILES_ACTIVE=local
