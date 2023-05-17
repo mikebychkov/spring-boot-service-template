@@ -9,39 +9,25 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "some_entity")
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class SomeEntity {
 
     @Id
     private UUID id;
-
-    private String username;
-    private String firstName;
-    private String lastName;
-    private String email;
-
-    public String getFullName() {
-
-        return String.format("%s %s",
-                Optional.ofNullable(this.lastName).orElse(""),
-                Optional.ofNullable(this.firstName).orElse("")
-        );
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id.equals(user.id);
+        SomeEntity someEntity = (SomeEntity) o;
+        return id.equals(someEntity.id);
     }
 
     @Override

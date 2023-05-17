@@ -1,7 +1,7 @@
 package service.template.security;
 
 import service.template.security.service.JwtService;
-import service.template.security.user.AuthUserDTO;
+import service.template.security.user.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class LoginController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthUserDTO credentials) {
+    public ResponseEntity<?> login(@RequestBody UserDTO credentials) {
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                                                             credentials.getUsername(),
