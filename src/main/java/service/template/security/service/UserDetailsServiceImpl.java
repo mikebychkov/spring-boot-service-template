@@ -19,16 +19,10 @@ public class UserDetailsServiceImpl implements UserDetailsService  {
     private final AuthUserRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public AuthUser loadUserByUsername(String username) throws UsernameNotFoundException {
 
         Optional<AuthUser> user = repository.findByUsernameIgnoreCase(username);
 
-        AuthUser currentUser = user.orElseThrow(() -> new UsernameNotFoundException("User not found."));
-
-        UserBuilder builder = User.withUsername(username);
-        builder.password(currentUser.getPassword());
-        builder.roles(currentUser.getRole());
-
-        return builder.build();
+        return user.orElseThrow(() -> new UsernameNotFoundException("User not found."));
     }
 }
