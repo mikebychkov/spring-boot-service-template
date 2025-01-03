@@ -27,7 +27,7 @@ public class MyRateLimiterAspect {
     private final HttpServletRequest httpServletRequest;
     private final MyRateLimiterConfiguration myRateLimiterConfiguration;
 
-    @Pointcut("@annotation(MyRateLimiter)")
+    @Pointcut("@annotation(service.template.aop.annotation.MyRateLimiter)")
     protected void myPointcut() {}
 
     @Around("myPointcut()")
@@ -65,8 +65,7 @@ public class MyRateLimiterAspect {
 
     private boolean acquirePermission(RateLimiter rateLimiter) {
         try {
-            rateLimiter.acquirePermission();
-            return true;
+            return rateLimiter.acquirePermission();
         } catch (Exception e) {
             return false;
         }
