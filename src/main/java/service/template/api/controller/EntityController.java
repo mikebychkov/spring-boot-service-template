@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import service.template.aop.annotation.MyRateLimiter;
 import service.template.api.dto.SomeEntityDTO;
 import service.template.api.service.entity.SomeEntityService;
 
@@ -16,6 +17,7 @@ public class EntityController {
 
     private final SomeEntityService someEntityService;
 
+    @MyRateLimiter(key = "get-some-entity")
     @GetMapping("/some-entities")
     public Page<SomeEntityDTO> getSomeEntity(Pageable pageable) {
 
